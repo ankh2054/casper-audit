@@ -1,0 +1,11 @@
+#RUSTFLAGS="--cfg fuzzing -Cpasses=sancov-module -Cdebug-assertions -Cdebuginfo=1 -Cforce-frame-pointers -Cllvm-args=-sanitizer-coverage-level=4 -Cllvm-args=-sanitizer-coverage-trace-compares -Cllvm-args=-sanitizer-coverage-inline-8bit-counters -Cllvm-args=-sanitizer-coverage-trace-geps -Cllvm-args=-sanitizer-coverage-prune-blocks=0 -Cllvm-args=-sanitizer-coverage-pc-table -Clink-dead-code -Cllvm-args=-sanitizer-coverage-stack-depth -Ccodegen-units=1" cargo +nightly build --release --target x86_64-unknown-linux-gnu && \
+#RUSTFLAGS="--cfg fuzzing -Cpasses=sancov-module -Cdebug-assertions -Cforce-frame-pointers -Cllvm-args=-sanitizer-coverage-level=4 -Cllvm-args=-sanitizer-coverage-trace-compares -Cllvm-args=-sanitizer-coverage-inline-8bit-counters -Cllvm-args=-sanitizer-coverage-trace-geps -Cllvm-args=-sanitizer-coverage-prune-blocks=0 -Cllvm-args=-sanitizer-coverage-pc-table -Clink-dead-code -Cllvm-args=-sanitizer-coverage-stack-depth -Ccodegen-units=1" cargo +nightly build --release --target x86_64-unknown-linux-gnu && \
+#RUSTFLAGS="" cargo +nightly build --release --target x86_64-unknown-linux-gnu && \
+#RUSTFLAGS="" cargo +nightly build --target x86_64-unknown-linux-gnu && \
+#clang++ ./target/x86_64-unknown-linux-gnu/debug/libcasper_fuzzer.a
+
+RUSTFLAGS="--cfg fuzzing -Cpasses=sancov-module -Cdebug-assertions -Cdebuginfo=1 -Cforce-frame-pointers -Cllvm-args=-sanitizer-coverage-level=4 -Cllvm-args=-sanitizer-coverage-trace-compares -Cllvm-args=-sanitizer-coverage-inline-8bit-counters -Cllvm-args=-sanitizer-coverage-trace-geps -Cllvm-args=-sanitizer-coverage-prune-blocks=0 -Cllvm-args=-sanitizer-coverage-pc-table -Clink-dead-code -Cllvm-args=-sanitizer-coverage-stack-depth -Ccodegen-units=1" cargo +nightly build --release --target x86_64-unknown-linux-gnu && \
+clang++ -fuse-ld=gold -fsanitize=fuzzer ./target/x86_64-unknown-linux-gnu/release/libcasper_fuzzer.a
+
+#RUSTFLAGS="-Clink-dead-code -Cpasses=sancov-module -Cllvm-args=-sanitizer-coverage-trace-pc-guard -C llvm-args=-sanitizer-coverage-level=2 -Cdebug-assertions -C codegen-units=1 -C link-arg=-lcoverage_rust" cargo build --release --target x86_64-unknown-linux-gnu
+#clang++ libfuzzer-gv/libFuzzer.a ./target/x86_64-unknown-linux-gnu/release/libcasper_fuzzer.a -lpthread -ldl
